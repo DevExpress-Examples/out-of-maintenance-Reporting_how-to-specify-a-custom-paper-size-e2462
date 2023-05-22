@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DevExpress.Drawing.Printing;
 using DevExpress.XtraPrinting;
 
 namespace PrintCustomPaperSize
@@ -16,7 +17,7 @@ namespace PrintCustomPaperSize
         {
             SimpleLink link = new SimpleLink(new PrintingSystem(), "Test");
 
-            link.PaperKind = System.Drawing.Printing.PaperKind.Custom;
+            link.PaperKind = DXPaperKind.Custom;
             link.CustomPaperSize = new Size(200, 200);
             link.Margins = new System.Drawing.Printing.Margins(20, 20, 20, 20);
             link.MinMargins = new System.Drawing.Printing.Margins(0, 0, 0, 0);

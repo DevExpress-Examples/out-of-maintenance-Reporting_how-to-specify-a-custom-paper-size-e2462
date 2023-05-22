@@ -1,39 +1,37 @@
-﻿Imports Microsoft.VisualBasic
 Imports System
 Imports System.Drawing
 Imports DevExpress.XtraPrinting
 
 Namespace PrintCustomPaperSize
-	Friend Class SimpleLink
-		Inherits Link
-		Private text_Renamed As String
 
-		Public Property Text() As String
-			Get
-				Return text_Renamed
-			End Get
-			Set(ByVal value As String)
-				text_Renamed = value
-			End Set
-		End Property
+    Friend Class SimpleLink
+        Inherits Link
 
-		Public Sub New()
+        Private textField As String
 
-		End Sub
+        Public Property Text As String
+            Get
+                Return textField
+            End Get
 
-		Public Sub New(ByVal ps As PrintingSystem, ByVal text As String)
-			MyBase.New(ps)
-			Me.text_Renamed = text
-		End Sub
+            Set(ByVal value As String)
+                textField = value
+            End Set
+        End Property
 
-		Protected Overrides Sub CreateDetail(ByVal graph As BrickGraphics)
-			MyBase.CreateDetail(graph)
+        Public Sub New()
+        End Sub
 
-			Dim textSize As SizeF = graph.MeasureString(Text, CInt(Fix(Math.Round(graph.ClientPageSize.Width))))
+        Public Sub New(ByVal ps As PrintingSystem, ByVal text As String)
+            MyBase.New(ps)
+            textField = text
+        End Sub
 
-			Dim rect As New RectangleF(0, 0, graph.ClientPageSize.Width, textSize.Height)
-
-			graph.DrawString(text_Renamed, rect)
-		End Sub
-	End Class
+        Protected Overrides Sub CreateDetail(ByVal graph As BrickGraphics)
+            MyBase.CreateDetail(graph)
+            Dim textSize As SizeF = graph.MeasureString(Text, CInt(Math.Round(graph.ClientPageSize.Width)))
+            Dim rect As RectangleF = New RectangleF(0, 0, graph.ClientPageSize.Width, textSize.Height)
+            graph.DrawString(textField, rect)
+        End Sub
+    End Class
 End Namespace
